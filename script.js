@@ -66,16 +66,16 @@ return `
         ${questions[currentQuestion].question}
       </h2>
       <div>
-        <input type="radio" name="option" value="1"> ${questions[currentQuestion].option1}
+        <input required type="radio" name="option" value="1" > ${questions[currentQuestion].option1}
       </div>
       <div>
-        <input type="radio" name="option" value="2"> ${questions[currentQuestion].option2}
+        <input required type="radio" name="option" value="2"> ${questions[currentQuestion].option2}
       </div>
       <div>
-        <input type="radio" name="option" value="3"> ${questions[currentQuestion].option3}
+        <input required type="radio" name="option" value="3"> ${questions[currentQuestion].option3}
       </div>
       <div>
-        <input type="radio" name="option" value="4"> ${questions[currentQuestion].option4}
+        <input required type="radio" name="option" value="4"> ${questions[currentQuestion].option4}
       </div> 
       
       <button type="submit" id="submitButton">
@@ -163,7 +163,11 @@ function selectAnswer() {
   let correctAnswer = questions[currentQuestion].answer;
   submitButton.addEventListener( 'click', function( event ) {
     var radioValue = $("input[name='option']:checked").val();
-    if(currentQuestion + 1 === questionCount) {
+    //console.log(radioValue);
+    if (radioValue === undefined) {
+      alert("Please choose an answer!");
+    }
+    else if(currentQuestion + 1 === questionCount) {
       let finalQuestion = currentQuestion;
       //console.log(finalQuestion);
       if(questions[finalQuestion].answer === radioValue) {
@@ -178,7 +182,7 @@ function selectAnswer() {
       nextQuestion.addEventListener( 'click', function( event ) {
       event.preventDefault();
       correctAmount++;
-      console.log(correctAmount);
+      //console.log(correctAmount);
       currentQuestion++;
       quizContainer.innerHTML = renderQuestion();
       selectAnswer();
